@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MangaThrift | Big Stories. Small Prices.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --purple: #8b5cf6;
+      --pink: #ff4fa3;
+      --dark: #171326;
+      --cream: #fff9f0;
+      --yellow: #ffe66d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Announcement bar */
+    .announcement {
+      background: var(--yellow);
+      color: var(--dark);
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 8%;
+      background: rgba(255, 249, 240, 0.95);
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      color: var(--purple);
+      text-decoration: none;
+      transform: rotate(-2deg);
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink);
+    }
+
+    .nav-button {
+      background: var(--dark);
+      color: white !important;
+      padding: 12px 22px;
+      border-radius: 50px;
+    }
+
+    .nav-button:hover {
+      background: var(--purple);
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 40px;
+      padding: 75px 8% 100px;
+      background:
+        radial-gradient(circle at 85% 15%, #ff9bd0 0, transparent 25%),
+        radial-gradient(circle at 10% 90%, #b8a0ff 0, transparent 30%),
+        linear-gradient(135deg, #f4eaff, #fff0f7 60%, #fff5c9);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "ドキドキ!";
+      position: absolute;
+      top: 25px;
+      right: 8%;
+      font-family: 'Bangers', cursive;
+      font-size: 2rem;
+      color: rgba(139, 92, 246, 0.25);
+      transform: rotate(12deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: white;
+      border: 2px solid var(--dark);
+      box-shadow: 4px 4px 0 var(--dark);
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+      transform: rotate(-2deg);
+    }
+
+    h1 {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: 0.98;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    h1 .highlight {
+      color: var(--purple);
+      text-shadow: 3px 3px 0 white, 5px 5px 0 var(--pink);
+    }
+
+    .hero-description {
+      max-width: 580px;
+      line-height: 1.9;
+      color: #514960;
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 16px 28px;
+      border: 2px solid var(--dark);
+      border-radius: 12px;
+      font-weight: 800;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .button:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--dark);
+    }
+
+    .button-primary {
+      color: white;
+      background: var(--purple);
+      box-shadow: 4px 4px 0 var(--dark);
+    }
+
+    .button-secondary {
+      color: var(--dark);
+      background: white;
+    }
+
+    /* Manga-inspired visual */
+    .hero-art {
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .burst {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      background: var(--yellow);
+      clip-path: polygon(
+        50% 0%, 60% 28%, 88% 8%, 76% 38%,
+        100% 50%, 74% 60%, 91% 89%, 62% 75%,
+        50% 100%, 39% 73%, 10% 91%, 25% 62%,
+        0% 50%, 27% 39%, 9% 10%, 39% 27%
+      );
+      animation: spin 35s linear infinite;
+    }
+
+    .book-stack {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 360px);
+      transform: rotate(-5deg);
+      transition: transform 0.35s ease;
+    }
+
+    .hero-art:hover .book-stack {
+      transform: rotate(0deg) scale(1.04);
+    }
+
+    .manga-cover {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 210px;
+      padding: 22px;
+      border: 4px solid var(--dark);
+      border-radius: 12px;
+      box-shadow: 8px 8px 0 var(--dark);
+      overflow: hidden;
+    }
+
+    .cover-one {
+      background:
+        radial-gradient(circle at 80% 20%, #ffec7b 0 10%, transparent 11%),
+        repeating-linear-gradient(135deg, transparent 0 12px, #ffffff20 13px 15px),
+        linear-gradient(145deg, #ff5ca8, #8b5cf6);
+      color: white;
+      transform: rotate(5deg) translateX(12px);
+    }
+
+    .cover-two {
+      width: 88%;
+      min-height: 165px;
+      margin-top: -8px;
+      background: linear-gradient(135deg, #25203d, #49417d);
+      color: white;
+      transform: rotate(-3deg);
+    }
+
+    .cover-three {
+      width: 76%;
+      min-height: 135px;
+      margin-top: -8px;
+      background: linear-gradient(135deg, #ffdb70, #ff8c66);
+      color: var(--dark);
+      transform: rotate(4deg) translateX(15px);
+    }
+
+    .cover-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .cover-title {
+      font-family: 'Bangers', cursive;
+      font-size: 3.4rem;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .cover-bottom {
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .floating-sticker {
+      position: absolute;
+      z-index: 2;
+      top: 20px;
+      right: 0;
+      background: var(--pink);
+      color: white;
+      border: 3px solid var(--dark);
+      padding: 16px;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      transform: rotate(12deg);
+      box-shadow: 4px 4px 0 var(--dark);
+    }
+
+    .floating-spark {
+      position: absolute;
+      left: 0;
+      bottom: 45px;
+      font-size: 3.5rem;
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(-10deg); }
+      50% { transform: translateY(-15px) rotate(10deg); }
+    }
+
+    /* Feature strip */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      padding: 35px 8%;
+      background: var(--dark);
+      color: white;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .feature span:last-child {
+      color: #c5bddb;
+      font-size: 0.78rem;
+    }
+
+    /* Welcome section */
+    .welcome {
+      padding: 100px 8%;
+      text-align: center;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-tag {
+      color: var(--pink);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(2.7rem, 5vw, 4.5rem);
+      letter-spacing: 1px;
+      margin: 15px 0 25px;
+    }
+
+    .welcome p {
+      max-width: 850px;
+      margin: 0 auto;
+      line-height: 2;
+      color: #625a70;
+    }
+
+    /* Bottom call to action */
+    .cta {
+      margin: 0 8% 80px;
+      padding: 65px 25px;
+      text-align: center;
+      border: 3px solid var(--dark);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, #ff9bd0, transparent 35%),
+        linear-gradient(135deg, #d8c9ff, #fff0c2);
+      box-shadow: 8px 8px 0 var(--dark);
+    }
+
+    .cta h2 {
+      margin-top: 0;
+    }
+
+    .cta p {
+      margin-bottom: 28px;
+      color: #514960;
+    }
+
+    footer {
+      background: var(--dark);
+      color: #d4cde4;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.8rem;
+      line-height: 2;
+    }
+
+    footer .logo {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 850px) {
+      nav {
+        justify-content: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 60px 7% 75px;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-art {
+        min-height: 360px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .feature {
+        justify-content: flex-start;
+        max-width: 260px;
+        margin: auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 2.1rem;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-art {
+        min-height: 320px;
+      }
+
+      .burst {
+        width: 260px;
+        height: 260px;
+      }
+
+      .book-stack {
+        max-width: 290px;
+      }
+
+      .cover-title {
+        font-size: 2.8rem;
+      }
+
+      .floating-sticker {
+        width: 78px;
+        height: 78px;
+        font-size: 0.65rem;
+        right: -5px;
+      }
+
+      .welcome {
+        padding: 75px 7%;
+      }
+
+      .cta {
+        margin: 0 6% 60px;
+        padding: 45px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="announcement">
+    ✨ BIG STORIES. SMALL PRICES. YOUR NEXT OBSESSION AWAITS. ✨
+  </div>
+
+  <nav>
+    <a href="#" class="logo">MANGA<span>THRIFT</span></a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#benefits">Why Us?</a>
+      <a href="#shop" class="nav-button">Explore Manga ↗</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">YOUR NEW FAVOURITE CHAPTER STARTS HERE</span>
+
+        <h1>
+          YOUR MANGA.<br>
+          YOUR WORLD.<br>
+          <span class="highlight">LESS $$$.</span>
+        </h1>
+
+        <p class="hero-description">
+          Your manga collection starts here — without breaking the bank.
+          Discover epic adventures, unforgettable characters and your
+          next favourite series, all at prices your wallet will love.
+          Big fan energy. Small price tags. That's the MangaThrift way.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#shop" class="button button-primary">
+            Find Your Next Read →
+          </a>
+          <a href="#about" class="button button-secondary">
+            Our Story
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-label="Decorative manga-inspired artwork">
+        <div class="burst"></div>
+
+        <div class="book-stack">
+          <div class="manga-cover cover-one">
+            <span class="cover-label">MANGATHRIFT ORIGINAL VIBES</span>
+            <span class="cover-title">READ<br>BEYOND!</span>
+            <span class="cover-bottom">YOUR NEXT ADVENTURE STARTS HERE</span>
+          </div>
+
+          <div class="manga-cover cover-two">
+            <span class="cover-label">VOLUME 02 · NEW WORLDS</span>
+            <span class="cover-title">NEXT<br>CHAPTER.</span>
+          </div>
+
+          <div class="manga-cover cover-three">
+            <span class="cover-label">VOLUME 03 · BIG SAVINGS</span>
+            <span class="cover-title">PLOT<br>TWIST!</span>
+          </div>
+        </div>
+
+        <div class="floating-sticker">
+          MORE MANGA<br>LESS SPENDING!
+        </div>
+
+        <div class="floating-spark" aria-hidden="true">✦</div>
+      </div>
+    </section>
+
+    <section class="features" id="benefits">
+      <div class="feature">
+        <span class="feature-icon">💸</span>
+        <div>
+          <strong>Wallet-Friendly Finds</strong>
+          <span>More stories for your money.</span>
+        </div>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">📚</span>
+        <div>
+          <strong>Collection Goals</strong>
+          <span>Find your next shelf favourite.</span>
+        </div>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">💖</span>
+        <div>
+          <strong>Made for Manga Fans</strong>
+          <span>Follow your passion, affordably.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="welcome" id="about">
+      <span class="section-tag">WELCOME TO THE MANGA-VERSE</span>
+
+      <h2>Big Fandom Energy. Tiny Price Tags.</h2>
+
+      <p>
+        Welcome to MangaThrift, your ultimate online destination for
+        affordable, high-quality manga. We bridge the gap between passion
+        and budget by sourcing great deals on your favourite series, from
+        timeless classics to trending releases. Our goal is to make
+        discovering new adventures and building your dream bookshelf
+        easier, more accessible and budget-friendly. Whether you're
+        completing a collection or diving into a brand-new story,
+        there's always another chapter waiting for you.
+      </p>
+    </section>
+
+    <section class="cta" id="shop">
+      <span class="section-tag">READY, SET, READ!</span>
+
+      <h2>Your Next Obsession Is Calling.</h2>
+
+      <p>
+        Your dream collection doesn't have to cost a fortune.
+        Let's turn that reading list into reality.
+      </p>
+
+      <a href="#home" class="button button-primary">
+        Let's Get Reading! ✨
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#home" class="logo">MANGA<span>THRIFT</span></a>
+    <p>Big stories. Small prices. Endless adventures.</p>
+    <p>© 2026 MangaThrift. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
